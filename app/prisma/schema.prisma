@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model gifs {
+  id       Int       @id @default(autoincrement())
+  giphy_id String    @unique(map: "giphy_pkey") @db.VarChar
+  comments Json?     @default("[]")
+  ratings  ratings[]
+}
+
+model ratings {
+  id       Int    @id @default(autoincrement())
+  giphy_id String @db.VarChar
+  user_id  Int
+  rating   Float? @db.Real
+  gifs     gifs   @relation(fields: [giphy_id], references: [giphy_id], onDelete: Cascade)
+  users    users  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model users {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique(map: "email_unique") @db.VarChar
+  password   String    @db.VarChar
+  created_at DateTime  @default(now()) @db.Date
+  ratings    ratings[]
+}
