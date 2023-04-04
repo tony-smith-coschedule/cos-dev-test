@@ -1,7 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
+
+const api_url = process.env.NEXT_PUBLIC_API_URL;
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -53,7 +54,7 @@ export default function LoginPage() {
 }
 
 async function fetchToken(email: string, password: string) {
-  const response = await fetch(`http://localhost:3000/api/user/signup`, {
+  const response = await fetch(`${api_url}/user/signup`, {
     method: 'POST',
     body: JSON.stringify({
       email,

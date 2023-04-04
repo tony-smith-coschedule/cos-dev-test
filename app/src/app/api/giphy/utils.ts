@@ -1,7 +1,7 @@
 import { GiphyFetch } from '@giphy/js-fetch-api';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ path: '.env.local' });
 
 // All the giphy stuff is consolidated to one file so that the API key can be protected.
 // although it looks like they expose their api key on their own front end so

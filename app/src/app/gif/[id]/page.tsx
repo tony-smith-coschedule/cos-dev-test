@@ -4,7 +4,8 @@ import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { useAsync } from 'react-async-hook';
-import { useRouter } from 'next/router';
+
+const api_url = process.env.NEXT_PUBLIC_API_URL;
 
 export default function GifPage({ params }) {
   const gif = useAsync(fetchGif, [params.id]);
@@ -122,8 +123,8 @@ export default function GifPage({ params }) {
 }
 
 async function fetchGif(id: string) {
-  const giphyResponse = await fetch(`http://localhost:3000/api/giphy/${id}`);
-  const extraDataResponse = await fetch(`http://localhost:3000/api/gifs/${id}`);
+  const giphyResponse = await fetch(`${api_url}/giphy/${id}`);
+  const extraDataResponse = await fetch(`${api_url}/gifs/${id}`);
   const { data: giphyData } = await giphyResponse.json();
   const extraData = await extraDataResponse.json();
   return {
@@ -136,25 +137,19 @@ async function fetchGif(id: string) {
 
 async function postComment(id: string, comment: string) {
   console.log('Button press triggering');
-  const commentResponse = await fetch(
-    `http://localhost:3000/api/gifs/${id}/comment`,
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        comment
-      })
-    }
-  );
+  const commentResponse = await fetch(`${api_url}/gifs/${id}/comment`, {
+    method: 'POST',
+    body: JSON.stringify({
+      comment
+    })
+  });
 }
 
 async function updateRating(id: string, rating: string) {
-  const ratingResponse = await fetch(
-    `http://localhost:3000/api/gifs/${id}/rate`,
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        rating
-      })
-    }
-  );
+  const ratingResponse = await fetch(`${api_url}/gifs/${id}/rate`, {
+    method: 'POST',
+    body: JSON.stringify({
+      rating
+    })
+  });
 }
