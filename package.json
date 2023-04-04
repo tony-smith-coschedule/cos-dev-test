@@ -12,7 +12,7 @@
   },
   "scripts": {
     "docker:start": "docker compose up -d",
-    "docker:clean": "docker compose down && docker compose rm -s -f -v",
+    "docker:clean": "docker compose down -v && docker compose rm -s -f -v",
     "start:next": "npm run dev --prefix ./app",
     "dev": "npm run docker:start && npm run start:next"
   }

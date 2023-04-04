@@ -9,6 +9,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ token });
     } catch (err) {
       console.log(`Could not create user: ${err}`);
+      return new NextResponse(JSON.stringify({ error: 'Cannot create user' }), {
+        status: 400
+      });
     }
   } else {
     return new NextResponse(JSON.stringify({ error: 'Cannot create user' }), {

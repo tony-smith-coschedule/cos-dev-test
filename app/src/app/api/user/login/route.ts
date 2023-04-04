@@ -9,6 +9,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ token });
     } catch (err) {
       console.log('Could not sign in user');
+      return new NextResponse(
+        JSON.stringify({
+          error: 'Could not log in'
+        }),
+        {
+          status: 400
+        }
+      );
     }
   }
 }

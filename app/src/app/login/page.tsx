@@ -53,7 +53,7 @@ export default function LoginPage() {
 }
 
 async function fetchToken(email: string, password: string) {
-  const response = await fetch(`${api_url}user/login`, {
+  const response = await fetch(`${api_url}/user/login`, {
     method: 'POST',
     body: JSON.stringify({
       email,
