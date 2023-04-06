@@ -11,6 +11,7 @@
     "prettier": "^2.8.6"
   },
   "scripts": {
+    "setup:prisma": "npm i --prefix ./app && cd app && npx prisma generate",
     "docker:start": "docker compose up -d",
     "docker:clean": "docker compose down -v && docker compose rm -s -f -v",
     "start:next": "npm run dev --prefix ./app",

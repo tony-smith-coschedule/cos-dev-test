@@ -1,7 +1,7 @@
 # Starting this thing
 
 To start up the application run the following command in the root directory of the project
-
+`npm run setup:prisma`
 `npm run dev`
 
 You'll also need a `.env` file with a `GIPHY_API_KEY` and `JWT_SECRET` in the app directory
